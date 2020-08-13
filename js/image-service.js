@@ -13,7 +13,7 @@ const populateImgs = () => {
 
 const _createImage = (imgIdx) => ({
   id: imgIdx,
-  imgUrl: `../img/${imgIdx}.jpg`,
+  imgUrl: `img/${imgIdx}.jpg`,
   keywords: ['none'],
 })
 
