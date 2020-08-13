@@ -56,15 +56,21 @@
               <div class="font-options">
                 <div class="font-option">
                   <label class="font-label">Font</label>
-                  <select name="fonts">
+                  <select name="fonts" onchange="onFontChange(this)">
                     <option value="Impact">Impact</option>
                     <option value="Arial">Arial</option>
-                    <option value="David">David</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
                   </select>
                 </div>
                 <div class="font-option">
                   <span class="font-label">Font Color</span>
-                  <input type="color" name="font-color" class="color-picker" />
+                  <input
+                    type="color"
+                    name="font-color"
+                    class="color-picker"
+                    value="#fff"
+                    onchange="onColorChange(this)"
+                  />
                 </div>
               </div>
             </div>

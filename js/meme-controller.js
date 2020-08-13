@@ -16,9 +16,11 @@ const renderCanvas = (currMeme) => {
   const img = new Image()
   gCanvas = document.querySelector('#img-canvas')
   gCtx = gCanvas.getContext('2d')
+  img.onload = () => {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+    renderMemeText(currMeme)
+  }
   img.src = currImg.imgUrl
-  gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-  renderMemeText(currMeme)
 }
 
 const onLineEdit = (elInputText) => {
@@ -41,7 +43,6 @@ const renderMemeText = (currMeme) => {
   let lines = getLines(gCtx, currMeme.currentText, 400)
   let xPos = currMeme.currentProps.posX
   let yPos = currMeme.currentProps.posY
-  console.log('Y: ' + yPos + '  X: ' + xPos)
   for (let i = 0; i < lines.length; i++) {
     gCtx.fillText(lines[i], xPos, yPos)
     gCtx.strokeText(lines[i], xPos, yPos)
@@ -67,5 +68,17 @@ const onFontDecrease = () => {
 
 const onAlignText = (value) => {
   setTextAlignment(value)
+  renderCanvas(currMeme)
+}
+
+const onColorChange = (elColorPicker) => {
+  const newColor = elColorPicker.value
+  setTextColor(newColor)
+  renderCanvas(currMeme)
+}
+
+const onFontChange = (elFontSelector) => {
+  const newFont = elFontSelector.value
+  setTextFont(newFont)
   renderCanvas(currMeme)
 }

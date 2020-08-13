@@ -64,3 +64,12 @@ const setXPosition = (newX) => {
 const setYPosition = (newY) => {
   gMeme.currentProps.posY = newY
 }
+
+const setTextColor = (newColor) => {
+  gMeme.currentProps.fillColor = newColor
+}
+
+const setTextFont = (newFont) => {
+  console.log(newFont)
+  gMeme.currentProps.font = newFont
+}
