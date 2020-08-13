@@ -3,7 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
     <title>Meme Generator</title>
   </head>
-  <body></body>
+  <body class="main-container">
+    <nav class="navbar">
+      <ul class="menu">
+        <li class="menu-item" onclick="onInitGallery(this)">Gallery</li>
+        <li class="menu-item">Saved Memes</li>
+      </ul>
+    </nav>
+    <main>
+      <section class="memegen-panel">
+        <div class="gallery hidden"></div>
+        <div class="meme-editor hidden">
+          <div class="img-container">
+            <canvas id="img-canvas" height="400" width="400"></canvas>
+          </div>
+          <div class="meme-tools">
+            <div class="text-editor">
+              <div class="text-input">
+                <input
+                  type="text"
+                  name="text-input"
+                  placeholder="Enter your text here..."
+                  oninput="onLineEdit(this)"
+                />
+              </div>
+              <div class="text-edit-btns">
+                <div class="btn" onclick="onFontIncrease()">
+                  <i class="fas fa-font fa-2x plus"><span>+</span></i>
+                </div>
+                <div class="btn" onclick="onFontDecrease()">
+                  <i class="fas fa-font fa-2x minus"><span>-</span></i>
+                </div>
+                <div class="btn"><i class="fas fa-align-left fa-2x"></i></div>
+                <div class="btn">
+                  <i class="fas fa-align-justify fa-2x"></i>
+                </div>
+                <div class="btn"><i class="fas fa-align-right fa-2x"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      All rights reserved
+    </footer>
+
+    <script src="./js/utils.js"></script>
+    <script src="./js/image-service.js"></script>
+    <script src="./js/image-controller.js"></script>
+    <script src="./js/meme-service.js"></script>
+    <script src="./js/meme-controller.js"></script>
+  </body>
 </html>
