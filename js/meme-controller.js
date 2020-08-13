@@ -38,12 +38,20 @@ const renderMemeText = (currMeme) => {
   gCtx.strokeStyle = strokeColor
   gCtx.font = `${fontSize}px ${font}`
   gCtx.textAlign = textAlign
-  gCtx.fillText(currMeme.currentText, 200, 50)
-  gCtx.strokeText(currMeme.currentText, 200, 50)
+  let lines = getLines(gCtx, currMeme.currentText, 400)
+  let xPos = currMeme.currentProps.posX
+  let yPos = currMeme.currentProps.posY
+  console.log('Y: ' + yPos + '  X: ' + xPos)
+  for (let i = 0; i < lines.length; i++) {
+    gCtx.fillText(lines[i], xPos, yPos)
+    gCtx.strokeText(lines[i], xPos, yPos)
+    yPos += 50
+  }
 }
 
 const onFontIncrease = () => {
   let fontSize = getFontSize()
+  if (fontSize > 50) return
   fontSize += 2
   setFontSize(fontSize)
   renderCanvas(currMeme)
@@ -51,7 +59,13 @@ const onFontIncrease = () => {
 
 const onFontDecrease = () => {
   let fontSize = getFontSize()
+  if (fontSize < 30) return
   fontSize -= 2
   setFontSize(fontSize)
+  renderCanvas(currMeme)
+}
+
+const onAlignText = (value) => {
+  setTextAlignment(value)
   renderCanvas(currMeme)
 }

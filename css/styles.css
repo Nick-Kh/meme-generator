@@ -67,10 +67,6 @@
   align-items: center;
 }
 
-#img-canvas {
-  word-wrap: break-word;
-}
-
 .meme-tools {
   width: 400px;
   height: 400px;
@@ -84,15 +80,37 @@
   width: 80%;
 }
 
-.text-edit-btns {
+.tools-container {
   display: flex;
   flex-direction: row;
+}
+
+.font-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.font-option {
+  margin: 10px 10px;
 }
 
 input {
   width: 100%;
   padding: 8px 5px;
   margin: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background: lightsteelblue;
+}
+
+.fonts {
+  padding: 2px;
+  width: 50%;
+  /* text-align: center; */
+}
+
+.color-picker {
+  margin: 0;
 }
 
 input:focus {

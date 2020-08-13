@@ -36,18 +36,36 @@
                   oninput="onLineEdit(this)"
                 />
               </div>
-              <div class="text-edit-btns">
+              <div class="tools-container">
                 <div class="btn" onclick="onFontIncrease()">
                   <i class="fas fa-font fa-2x plus"><span>+</span></i>
                 </div>
                 <div class="btn" onclick="onFontDecrease()">
                   <i class="fas fa-font fa-2x minus"><span>-</span></i>
                 </div>
-                <div class="btn"><i class="fas fa-align-left fa-2x"></i></div>
-                <div class="btn">
+                <div class="btn" onclick="onAlignText('left')">
+                  <i class="fas fa-align-left fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onAlignText('center')">
                   <i class="fas fa-align-justify fa-2x"></i>
                 </div>
-                <div class="btn"><i class="fas fa-align-right fa-2x"></i></div>
+                <div class="btn" onclick="onAlignText('right')">
+                  <i class="fas fa-align-right fa-2x"></i>
+                </div>
+              </div>
+              <div class="font-options">
+                <div class="font-option">
+                  <label class="font-label">Font</label>
+                  <select name="fonts">
+                    <option value="Impact">Impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="David">David</option>
+                  </select>
+                </div>
+                <div class="font-option">
+                  <span class="font-label">Font Color</span>
+                  <input type="color" name="font-color" class="color-picker" />
+                </div>
               </div>
             </div>
           </div>
