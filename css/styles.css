@@ -77,12 +77,13 @@ body {
   padding: 0 30px;
   border: none;
   border-radius: 20px;
+  background: lightgray;
 }
 
 .fa-search {
   align-self: center;
   position: relative;
-  left: 140px;
+  left: 11%;
   padding: 20px 0;
 }
 
