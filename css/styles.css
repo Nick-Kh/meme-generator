@@ -4,24 +4,42 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f3f3f3;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: stretch;
 }
 
 .navbar {
   height: 80px;
   background: linear-gradient(darkmagenta, darkslateblue);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  box-shadow: 0px 11px 10px -3px rgba(0, 0, 0, 0.62);
+}
+
+.logo {
+  display: flex;
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-style: oblique;
+  font-size: 1.5rem;
+  margin: 10px 0;
 }
 
 .menu {
   display: flex;
   align-items: center;
   width: 40%;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .menu-item {
@@ -29,34 +47,83 @@
   padding: 10px 20px;
   font-size: 1.5rem;
   display: inline-block;
-  transition: 0.3s;
-  border-radius: 10%;
   color: white;
 }
 
 .selected,
 .menu-item:hover {
-  background: darkred;
-  color: black;
+  border-bottom: 2px darkblue solid;
   cursor: pointer;
 }
 
 .memegen-panel {
   width: 100%;
   height: 500px;
-  margin: 10px 0;
-  border: 2px solid black;
   overflow-y: auto;
 }
 
+.search-bar {
+  margin: 20px 0;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.search-bar input {
+  width: 20%;
+  height: 30px;
+  align-self: center;
+  padding: 0 30px;
+  border: none;
+  border-radius: 20px;
+}
+
+.fa-search {
+  align-self: center;
+  position: relative;
+  left: 140px;
+  padding: 20px 0;
+}
+
+.keywords {
+  width: 60%;
+  height: 80%;
+  border-radius: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.keyword {
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 5px 10px;
+  color: grey;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.keyword:hover {
+  transform: scale(1.2);
+  background: purple;
+  opacity: 0.8;
+  cursor: pointer;
+  color: white;
+}
+
 .gallery {
-  background: darkgray;
   width: 90%;
   display: grid;
-  margin: auto;
+  margin: 10px auto;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-auto-rows: 150px;
   gap: 10px;
+}
+
+.meme-img {
+  box-shadow: 14px 11px 5px -8px rgba(0, 0, 0, 0.48);
 }
 
 .meme-editor {
@@ -67,22 +134,31 @@
   align-items: center;
 }
 
+.img-container {
+  box-shadow: 10px -11px 18px -3px rgba(0, 0, 0, 0.5);
+  border: rgba(0, 0, 0, 0.62) 1px solid;
+}
+
 .meme-tools {
   width: 400px;
   height: 400px;
-  border: darkgray 2px solid;
+  border: rgba(0, 0, 0, 0.62) 2px solid;
+  background: linear-gradient(#bf78f5, darkslateblue);
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .text-editor {
-  width: 80%;
+  width: 100%;
 }
 
 .tools-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 20px;
 }
 
 .font-options {
@@ -90,23 +166,24 @@
   flex-direction: row;
   justify-content: center;
 }
-.font-option {
-  margin: 10px 10px;
+
+.font-select {
+  align-self: center;
 }
 
 input {
-  width: 100%;
-  padding: 8px 5px;
-  margin: 5px;
-  border-radius: 5px;
+  width: 80%;
+  height: 30px;
+  padding: 0 5px;
+  margin: 5px auto;
+  border-radius: 10px;
   border: 1px solid black;
-  background: lightsteelblue;
+  background: lightgray;
 }
 
 .fonts {
   padding: 2px;
   width: 50%;
-  /* text-align: center; */
 }
 
 .color-picker {
@@ -114,25 +191,52 @@ input {
 }
 
 input:focus {
-  outline-color: darkviolet;
+  border: 2px solid darkviolet;
+  outline: none;
 }
 
 .btn {
   margin: 15px;
   cursor: pointer;
   transition: 0.3s;
+  padding: 5px;
+  background: darkmagenta;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  color: darkmagenta;
+  background: white;
+}
+
+.add-line {
+  color: lime;
+}
+
+.remove-line {
+  color: orangered;
+}
+
+label:hover {
+  cursor: pointer;
 }
 
 .fas {
   transition: 0.4s;
+  color: white;
 }
 
 .fas:hover {
-  color: darkviolet;
+  color: darkmagenta;
 }
 
 .fas:active {
   color: red;
+}
+
+.fas.disabled {
+  color: darkgray;
+  cursor: default;
 }
 
 .increase {
@@ -160,7 +264,14 @@ input:focus {
   display: none;
 }
 
+.selected-text {
+  border: 2px red dashed;
+}
+
 footer {
-  height: 80px;
+  color: white;
+  text-align: center;
+  max-height: 70px;
   background: darkorchid;
+  flex: 1;
 }

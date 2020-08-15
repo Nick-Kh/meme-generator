@@ -5,6 +5,14 @@ const toggleElementsToDisplay = (elToDisplay, elToRemove) => {
   elHide.classList.add('hidden')
 }
 
+const toggleMenuButtons = (btnToSelect, btnToUnselect) => {
+  var newBtn = document.querySelector('.' + btnToSelect)
+  var prevBtn = document.querySelector('.' + btnToUnselect)
+  newBtn.classList.add('selected')
+  prevBtn.classList.remove('selected')
+  return newBtn.innerText
+}
+
 function getLines(gCtx, text, maxWidth) {
   var words = text.split(' ')
   var lines = []

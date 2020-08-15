@@ -10,38 +10,47 @@ const DEFAULT_POSITIONS = {
   yPosBottom: 350,
 }
 
+const DEFAULT_PROPS = {
+  txt: '',
+  width: 0,
+  height: 0,
+  linesCount: 0,
+  startPosX: 200,
+  startPosY: 50,
+  fillColor: 'white',
+  strokeColor: 'black',
+  fontSize: 40,
+  font: 'Impact',
+  textAlign: 'center',
+}
+
 const memeInit = (imgId) => {
   gMeme = {
     selectedImgId: imgId,
     selectedLineIdx: 0,
-    lines: [],
-    currentText: '',
-    currentProps: {
-      posX: 200,
-      posY: 50,
-      fillColor: 'white',
-      strokeColor: 'black',
-      fontSize: 40,
-      font: 'Impact',
-      textAlign: 'center',
-    },
+    lines: [{ ...DEFAULT_PROPS }],
   }
 }
 
 const getCurrentMeme = () => gMeme
 
-const addMemeText = (txt) => {
-  gMeme.currentText = txt
+const setCurrentMeme = (meme) => {
+  gMeme = meme
 }
 
-const getFontSize = () => gMeme.currentProps.fontSize
+const addMemeText = (txt) => {
+  if (txt === '_') txt = ''
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+const getFontSize = () => gMeme.lines[gMeme.selectedLineIdx].fontSize
 
 const setFontSize = (fontSize) => {
-  gMeme.currentProps.fontSize = fontSize
+  gMeme.lines[gMeme.selectedLineIdx].fontSize = fontSize
 }
 
 const setTextAlignment = (alignment) => {
-  gMeme.currentProps.textAlign = alignment
+  gMeme.lines[gMeme.selectedLineIdx].textAlign = alignment
   switch (alignment) {
     case 'center':
       setXPosition(DEFAULT_POSITIONS.xPosCenter)
@@ -58,18 +67,37 @@ const setTextAlignment = (alignment) => {
 }
 
 const setXPosition = (newX) => {
-  gMeme.currentProps.posX = newX
+  gMeme.lines[gMeme.selectedLineIdx].startPosX = newX
 }
 
 const setYPosition = (newY) => {
-  gMeme.currentProps.posY = newY
+  gMeme.lines[gMeme.selectedLineIdx].startPosY = newY
 }
 
 const setTextColor = (newColor) => {
-  gMeme.currentProps.fillColor = newColor
+  gMeme.lines[gMeme.selectedLineIdx].fillColor = newColor
 }
 
 const setTextFont = (newFont) => {
-  console.log(newFont)
-  gMeme.currentProps.font = newFont
+  gMeme.lines[gMeme.selectedLineIdx].font = newFont
+}
+
+const setEndTextPositions = (xPos, yPos) => {
+  gMeme.lines[gMeme.selectedLineIdx].endPosX = xPos
+  gMeme.lines[gMeme.selectedLineIdx].endPosY = yPos
+}
+
+const addNewTextLine = () => {
+  gMeme.selectedLineIdx++
+  gMeme.lines[gMeme.selectedLineIdx] = { ...DEFAULT_PROPS }
+  if (gMeme.selectedLineIdx === 1) setYPosition(DEFAULT_POSITIONS.yPosBottom)
+  if (gMeme.selectedLineIdx === 2) setYPosition(DEFAULT_POSITIONS.yPosCenter)
+}
+
+const setCurrLineIdx = (idx) => {
+  gMeme.selectedLineIdx = idx
+}
+
+const removeLine = (idx) => {
+  gMeme.lines[idx] = { ...DEFAULT_PROPS }
 }

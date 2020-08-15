@@ -9,16 +9,45 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Meme Generator</title>
   </head>
-  <body class="main-container">
+  <body class="main-container" onload="onInitGallery()">
     <nav class="navbar">
+      <span class="logo">
+        <img
+          src="./icons/trollface.png"
+          style="width: 45px; height: auto; margin-left: 5px;"
+          alt=""
+        />
+        <span style="margin-left: 10px; align-self: center;">MemeGen</span>
+      </span>
       <ul class="menu">
-        <li class="menu-item" onclick="onInitGallery(this)">Gallery</li>
-        <li class="menu-item">Saved Memes</li>
+        <li
+          class="menu-item gallery-btn selected"
+          onclick="onInitGallery(this)"
+        >
+          Gallery
+        </li>
+        <li class="menu-item saved-memes-btn" onclick="onInitGallery(this)">
+          My Memes
+        </li>
       </ul>
     </nav>
+    <div class="search-bar">
+      <i class="fas fa-search" style="color: darkorchid;"></i>
+      <input
+        type="text"
+        id="search"
+        oninput="onSearchInput(this.value)"
+        placeholder="Type keyword to search..."
+      />
+      <div class="keywords"></div>
+    </div>
     <main>
       <section class="memegen-panel">
         <div class="gallery hidden"></div>
@@ -28,13 +57,26 @@
           </div>
           <div class="meme-tools">
             <div class="text-editor">
-              <div class="text-input">
+              <div class="text-input tools-container">
                 <input
                   type="text"
                   name="text-input"
+                  id="text-input"
                   placeholder="Enter your text here..."
                   oninput="onLineEdit(this)"
+                  onfocus="renderCanvas()"
                 />
+              </div>
+              <div class="tools-container">
+                <div class="btn" onclick="onSelectNextLine()">
+                  <i class="fas fa-sort fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onAddLine(this)">
+                  <i class="fas fa-plus-circle fa-2x add-line"></i>
+                </div>
+                <div class="btn" onclick="onRemoveSelectedLine()">
+                  <i class="fas fa-trash fa-2x remove-line"></i>
+                </div>
               </div>
               <div class="tools-container">
                 <div class="btn" onclick="onFontIncrease()">
@@ -53,24 +95,51 @@
                   <i class="fas fa-align-right fa-2x"></i>
                 </div>
               </div>
-              <div class="font-options">
-                <div class="font-option">
-                  <label class="font-label">Font</label>
+              <div class="tools-container">
+                <div class="btn" onclick="onMoveUp()">
+                  <i class="fas fa-arrow-up fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onMoveDown()">
+                  <i class="fas fa-arrow-down fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onMoveLeft()">
+                  <i class="fas fa-arrow-left fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onMoveRight()">
+                  <i class="fas fa-arrow-right fa-2x"></i>
+                </div>
+              </div>
+              <div class="tools-container">
+                <div class="font-select">
                   <select name="fonts" onchange="onFontChange(this)">
                     <option value="Impact">Impact</option>
                     <option value="Arial">Arial</option>
                     <option value="Comic Sans MS">Comic Sans MS</option>
                   </select>
                 </div>
-                <div class="font-option">
-                  <span class="font-label">Font Color</span>
-                  <input
-                    type="color"
-                    name="font-color"
-                    class="color-picker"
-                    value="#fff"
-                    onchange="onColorChange(this)"
-                  />
+                <div>
+                  <label class="btn" style="display: inline-block;"
+                    ><i class="fas fa-palette fa-2x"></i>
+                    <input
+                      type="color"
+                      name="font-color"
+                      class="color-picker"
+                      value="#ffffff"
+                      hidden
+                      onchange="onColorChange(this)"
+                    />
+                  </label>
+                </div>
+              </div>
+              <div class="tools-container">
+                <div class="btn" onclick="onSaveMeme()">
+                  <i class="fas fa-save fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onDownloadMeme()">
+                  <i class="fas fa-download fa-2x"></i>
+                </div>
+                <div class="btn" onclick="onShareMeme()">
+                  <i class="fas fa-share-alt fa-2x"></i>
                 </div>
               </div>
             </div>
@@ -79,10 +148,12 @@
       </section>
     </main>
     <footer>
-      All rights reserved
+      <span style="display: inline-block; margin-top: 30px;"
+        >All rights reserved Nick Khemelevsky &copy; 2020</span
+      >
     </footer>
-
     <script src="./js/utils.js"></script>
+    <script src="./js/storage-service.js"></script>
     <script src="./js/image-service.js"></script>
     <script src="./js/image-controller.js"></script>
     <script src="./js/meme-service.js"></script>
