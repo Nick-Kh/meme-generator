@@ -269,10 +269,79 @@ label:hover {
   border: 2px red dashed;
 }
 
+.success-modal {
+  display: none;
+  transition: 0.4s;
+  position: absolute;
+  bottom: 31%;
+  right: 38%;
+  z-index: 100;
+  width: 100px;
+  height: 50px;
+  border-radius: 40px;
+}
+
 footer {
   color: white;
   text-align: center;
   max-height: 70px;
   background: darkorchid;
   flex: 1;
+}
+
+button {
+  border: none;
+  padding: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Media queries */
+
+@media only screen and (max-width: 790px) {
+  body {
+    justify-content: flex-start;
+  }
+
+  .navbar {
+    font-size: 1rem;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .search-bar {
+    height: auto;
+    margin-top: 20px;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .search-bar input {
+    width: 60%;
+    height: 30px;
+  }
+
+  .fa-search {
+    display: none;
+  }
+
+  .keyword {
+    margin: 5px;
+  }
+
+  .keywords {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .meme-editor {
+    flex-direction: column;
+    margin: 0 auto;
+  }
 }

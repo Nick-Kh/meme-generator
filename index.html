@@ -126,21 +126,37 @@
                       class="color-picker"
                       value="#ffffff"
                       hidden
-                      onchange="onColorChange(this)"
+                      oninput="onColorChange(this)"
                     />
                   </label>
                 </div>
               </div>
               <div class="tools-container">
                 <div class="btn" onclick="onSaveMeme()">
+                  <div class="success-modal hidden">
+                    <img
+                      src="./icons/success.gif"
+                      style="width: 100%; height: auto;"
+                      alt=""
+                    />
+                  </div>
                   <i class="fas fa-save fa-2x"></i>
                 </div>
                 <div class="btn" onclick="onDownloadMeme()">
                   <i class="fas fa-download fa-2x"></i>
                 </div>
-                <div class="btn" onclick="onShareMeme()">
-                  <i class="fas fa-share-alt fa-2x"></i>
-                </div>
+                <form
+                  action=""
+                  method="POST"
+                  enctype="multipart/form-data"
+                  onsubmit="onShareMeme(this, event)"
+                >
+                  <input name="img" type="hidden" id="imgData" />
+                  <button class="btn" type="submit">
+                    <i class="fas fa-share-alt fa-2x"></i>
+                  </button>
+                  <div class="share-container"></div>
+                </form>
               </div>
             </div>
           </div>
@@ -152,6 +168,10 @@
         >All rights reserved Nick Khemelevsky &copy; 2020</span
       >
     </footer>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-2.1.1.min.js"
+    ></script>
     <script src="./js/utils.js"></script>
     <script src="./js/storage-service.js"></script>
     <script src="./js/image-service.js"></script>
