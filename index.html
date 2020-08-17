@@ -52,7 +52,13 @@
       <section class="memegen-panel">
         <div class="gallery hidden"></div>
         <div class="meme-editor hidden">
-          <div class="img-container">
+          <div
+            class="img-container"
+            onmousedown="onMouseDown(this, event)"
+            onmousemove="onMouseDrag(this,event)"
+            onmouseup="onMouseUp(event)"
+            onclick="onMouseSelect(event)"
+          >
             <canvas id="img-canvas" height="400" width="400"></canvas>
           </div>
           <div class="meme-tools">
@@ -68,62 +74,65 @@
                 />
               </div>
               <div class="tools-container">
-                <div class="btn" onclick="onSelectNextLine()">
+                <button class="btn" onclick="onSelectNextLine()">
                   <i class="fas fa-sort fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onAddLine(this)">
+                </button>
+                <button class="btn" onclick="onAddLine(this)">
                   <i class="fas fa-plus-circle fa-2x add-line"></i>
-                </div>
-                <div class="btn" onclick="onRemoveSelectedLine()">
+                </button>
+                <button class="btn" onclick="onRemoveSelectedLine()">
                   <i class="fas fa-trash fa-2x remove-line"></i>
-                </div>
+                </button>
               </div>
               <div class="tools-container">
-                <div class="btn" onclick="onFontIncrease()">
+                <button class="btn" onclick="onFontIncrease()">
                   <i class="fas fa-font fa-2x plus"><span>+</span></i>
-                </div>
-                <div class="btn" onclick="onFontDecrease()">
+                </button>
+                <button class="btn" onclick="onFontDecrease()">
                   <i class="fas fa-font fa-2x minus"><span>-</span></i>
-                </div>
-                <div class="btn" onclick="onAlignText('left')">
+                </button>
+                <button class="btn" onclick="onAlignText('left')">
                   <i class="fas fa-align-left fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onAlignText('center')">
+                </button>
+                <button class="btn" onclick="onAlignText('center')">
                   <i class="fas fa-align-justify fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onAlignText('right')">
+                </button>
+                <button class="btn" onclick="onAlignText('right')">
                   <i class="fas fa-align-right fa-2x"></i>
-                </div>
+                </button>
               </div>
               <div class="tools-container">
-                <div class="btn" onclick="onMoveUp()">
+                <button class="btn" onclick="onMoveUp()">
                   <i class="fas fa-arrow-up fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onMoveDown()">
+                </button>
+                <button class="btn" onclick="onMoveDown()">
                   <i class="fas fa-arrow-down fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onMoveLeft()">
+                </button>
+                <button class="btn" onclick="onMoveLeft()">
                   <i class="fas fa-arrow-left fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onMoveRight()">
+                </button>
+                <button class="btn" onclick="onMoveRight()">
                   <i class="fas fa-arrow-right fa-2x"></i>
-                </div>
+                </button>
               </div>
               <div class="tools-container">
                 <div class="font-select">
-                  <select name="fonts" onchange="onFontChange(this)">
+                  <select
+                    name="fonts"
+                    id="font-selector"
+                    onchange="onFontChange(this)"
+                  >
                     <option value="Impact">Impact</option>
                     <option value="Arial">Arial</option>
                     <option value="Comic Sans MS">Comic Sans MS</option>
                   </select>
                 </div>
                 <div>
-                  <label class="btn" style="display: inline-block;"
-                    ><i class="fas fa-palette fa-2x"></i>
+                  <label class="btn color-picker">
+                    <i class="fas fa-palette fa-2x"></i>
                     <input
                       type="color"
                       name="font-color"
-                      class="color-picker"
                       value="#ffffff"
                       hidden
                       oninput="onColorChange(this)"
@@ -132,7 +141,7 @@
                 </div>
               </div>
               <div class="tools-container">
-                <div class="btn" onclick="onSaveMeme()">
+                <button class="btn" onclick="onSaveMeme()">
                   <div class="success-modal hidden">
                     <img
                       src="./icons/success.gif"
@@ -141,18 +150,18 @@
                     />
                   </div>
                   <i class="fas fa-save fa-2x"></i>
-                </div>
-                <div class="btn" onclick="onDownloadMeme()">
+                </button>
+                <button class="btn" onclick="onDownloadMeme()">
                   <i class="fas fa-download fa-2x"></i>
-                </div>
+                </button>
                 <form
                   action=""
                   method="POST"
                   enctype="multipart/form-data"
                   onsubmit="onShareMeme(this, event)"
                 >
-                  <input name="img" type="hidden" id="imgData" />
                   <button class="btn" type="submit">
+                    <input name="img" type="hidden" id="imgData" />
                     <i class="fas fa-share-alt fa-2x"></i>
                   </button>
                   <div class="share-container"></div>

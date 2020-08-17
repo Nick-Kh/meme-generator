@@ -6,15 +6,15 @@ let gCurrMeme
 let gCurrLine
 let gSelected = false
 let gMemeId = 1000
+let gDrag = false
 const STEP = 5
 
 const onImageClick = (imgId, memeId = null) => {
-  let elSearch = document.querySelector('.search-bar')
+  document.querySelector('.search-bar').classList.add('hidden')
   let elBtns = document.querySelectorAll('li')
   for (let i = 0; i < elBtns.length; i++) {
     elBtns[i].classList.remove('selected')
   }
-  elSearch.classList.add('hidden')
   toggleElementsToDisplay('meme-editor', 'gallery')
   if (!memeId) {
     memeInit(imgId)
@@ -141,26 +141,22 @@ const renderSelectedArea = () => {
   const { width, startPosX, startPosY, linesCount, height } = gCurrMeme.lines[
     gCurrLine
   ]
-
   gCtx.beginPath()
-  var startX = startPosX - width / 2
-  var endX = width
-  var startY = startPosY - height
-  var endY = linesCount * height * 1.3
+  let startX = startPosX - width / 2
+  let endX = width
+  let startY = startPosY - height
+  let endY = linesCount * height * 1.3
   gCtx.rect(startX, startY, endX, endY)
   gCtx.strokeStyle = 'red'
   gCtx.stroke()
-  gSelected = false
 }
 
 const clearInput = () => {
-  let elInputText = document.querySelector('#text-input')
-  elInputText.value = ''
+  document.querySelector('#text-input').value = ''
 }
 
 const setCurrentInput = () => {
-  let elInputText = document.querySelector('#text-input')
-  elInputText.value = gCurrMeme.lines[gCurrLine].txt
+  document.querySelector('#text-input').value = gCurrMeme.lines[gCurrLine].txt
 }
 
 const onRemoveSelectedLine = () => {
@@ -226,6 +222,69 @@ const onSaveMeme = () => {
   setTimeout(function () {
     elSuccessModal.style.display = 'none'
   }, 1500)
+}
+
+const onMouseDown = (elCanvas, ev) => {
+  for (let i = 0; i < gCurrMeme.lines.length; i++) {
+    if (isPointing(gCurrMeme.lines[i], ev.offsetX, ev.offsetY)) {
+      gCurrMeme.lines[i].textAlign = 'center'
+      gDrag = true
+      elCanvas.style.cursor = 'pointer'
+      gSelected = true
+      gCurrLine = i
+      setCurrLineIdx(i)
+      setCurrentInput()
+      renderCanvas(gCurrMeme)
+    }
+  }
+}
+
+const onMouseDrag = (elCanvas, ev) => {
+  elCanvas.style.cursor = 'default'
+  for (let i = 0; i < gCurrMeme.lines.length; i++) {
+    const { width, height } = gCurrMeme.lines[i]
+    if (isPointing(gCurrMeme.lines[i], ev.offsetX, ev.offsetY)) {
+      console.log('Bingo! Lines no.: ' + i)
+      elCanvas.style.cursor = 'pointer'
+    }
+    let currWidth =
+      gCurrMeme.lines[i].textAlign === 'center' ? width / 2 : width
+    if (gDrag) {
+      if (ev.offsetX - currWidth > 0 && ev.offsetX + currWidth < gCanvas.width)
+        setXPosition(ev.offsetX)
+      if (ev.offsetY - height > 0 && ev.offsetY < gCanvas.height)
+        setYPosition(ev.offsetY)
+      renderCanvas(gCurrMeme)
+    }
+  }
+}
+
+const onMouseSelect = (ev) => {
+  for (let i = 0; i < gCurrMeme.lines.length; i++) {
+    if (isPointing(gCurrMeme.lines[i], ev.offsetX, ev.offsetY)) {
+      gSelected = true
+      gCurrLine = i
+      setCurrLineIdx(i)
+      setCurrentInput()
+    }
+  }
+  renderCanvas(gCurrMeme)
+}
+
+const isPointing = (line, x, y) => {
+  const { width, startPosX, startPosY, linesCount, height } = line
+  let startX = startPosX - width / 2
+  let endX = startX + width
+  let startY = startPosY - height
+  let endY = startPosY + linesCount * height * 1.3
+  if (x >= startX && x <= endX) if (y >= startY && y <= endY) return true
+  return false
+}
+
+const onMouseUp = (ev) => {
+  gDrag = false
+  gSelected = false
+  renderCanvas()
 }
 
 function onShareMeme(elForm, ev) {

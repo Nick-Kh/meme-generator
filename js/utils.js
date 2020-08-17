@@ -1,8 +1,6 @@
 const toggleElementsToDisplay = (elToDisplay, elToRemove) => {
-  const elShow = document.querySelector('.' + elToDisplay)
-  const elHide = document.querySelector('.' + elToRemove)
-  elShow.classList.remove('hidden')
-  elHide.classList.add('hidden')
+  document.querySelector('.' + elToDisplay).classList.remove('hidden')
+  document.querySelector('.' + elToRemove).classList.add('hidden')
 }
 
 const toggleMenuButtons = (btnToSelect, btnToUnselect) => {

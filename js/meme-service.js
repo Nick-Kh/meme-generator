@@ -3,8 +3,8 @@
 let gMeme = {}
 const DEFAULT_POSITIONS = {
   xPosCenter: 200,
-  xPosLeft: 20,
-  xPosRight: 370,
+  xPosLeft: 1,
+  xPosRight: 399,
   yPosTop: 50,
   yPosCenter: 200,
   yPosBottom: 350,
